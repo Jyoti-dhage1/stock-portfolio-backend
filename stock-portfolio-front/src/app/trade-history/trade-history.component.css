@@ -1,0 +1,17 @@
+
+.container {
+    display: flex;
+    justify-content:space-between; /* Centers horizontally */
+    align-items:flex-end;  
+    margin-top: 10px;  /* Centers vertically */
+  }
+
+  .refresh-button{
+    background-color:darkblue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+  }

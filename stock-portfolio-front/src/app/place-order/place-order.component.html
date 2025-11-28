@@ -1,0 +1,54 @@
+<div class="image-text-container">
+    <img src="assets/images/portfolio.jpg" style="width: 40px; height: 40px;"/>
+    <h3 style="color:darkblue;margin-left:10px;">Welcome User for Stock Trading!</h3>
+</div>
+<div style="padding:10px; border: 10px solid lightgray;">
+    <h3 style=" font-weight:normal; color:darkblue">Place a Trade</h3>
+    <form ngsubmit="submitOrder()">
+        <mat-form-field appearance="outline"  style="margin-left: 50px;height:50px">
+            <mat-label sty>Stock</mat-label>
+            <mat-select (selectionChange)="onChange($event)" name="stockTicker" [(ngModel)]="form.stockTicker">
+                <mat-option *ngFor="let stock of stocks" [value]="stock.stockTicker">{{stock.stockTicker}} -
+                    {{stock.companyName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="margin-left: 30px; margin-bottom: 20px;">
+            <mat-label>Company</mat-label>
+            <input matInput [value]="selectedStock?.companyName" readonly>
+        </mat-form-field>
+
+        <mat-button-toggle-group style="margin-left: 20px;" name="buyOrSell" [(ngModel)]="form.buyOrSell">
+            <mat-button-toggle class="custom-toggle" value="BUY">Buy</mat-button-toggle>
+            <mat-button-toggle class="custom-toggle" value="SELL">Sell</mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <mat-form-field appearance="outline" style="margin-left: 30px;">
+            <mat-label>Quantity</mat-label>
+            <input matInput type="number" name="volume" [(ngModel)]="form.volume"  required
+            #volumeCtrl="ngModel"
+          >
+      
+          <!-- Error Message -->
+          <mat-error *ngIf="volumeCtrl.invalid">
+            Volume is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="margin-left: 30px;">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" name="price" [(ngModel)]="form.price">
+        </mat-form-field>
+
+        <mat-card *ngIf="form.stockTicker" style="padding: 10px;">
+            <p>You are placing a <b>{{form.buyOrSell}}</b> order</p>
+            <p>Symbol: {{form.stockTicker}}</p>
+            <p>Quantity: {{form.volume}}</p>
+            <p>Price: {{form.price}}</p>
+            <p>Total: <b>{{form.volume * form.price | number:'1.2-2'}}</b></p>
+        </mat-card>
+        <div class="container">
+        <button mat-raised-button class="place-order-button" (click)="submitOrder()">Place Order</button>
+    </div>
+    </form>
+</div>

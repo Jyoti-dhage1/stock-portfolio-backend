@@ -1,0 +1,39 @@
+.place-order-button{
+    background-color:darkblue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    
+
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;  
+    margin-top: 10px;  /* Centers vertically */
+  
+  }
+
+  .custom-toggle {
+    padding: 10px;
+  }
+
+  .custom-toggle.mat-button-toggle-checked {
+    background-color: grey /* Green background when selected */
+  }
+
+  .image-text-container {
+    display: flex;
+    align-items: center;   /* vertically center image + h3 */
+    gap: 10px;   
+    margin-left: 10px;    
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+  }

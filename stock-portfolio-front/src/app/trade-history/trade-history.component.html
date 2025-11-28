@@ -1,0 +1,67 @@
+<div class="container"><h3 style="color: darkblue;margin-left:10px;font-weight:normal">Trade history</h3>
+    <button mat-raised-button (click)="refreshHistory()" class="refresh-button">Refersh</button></div>
+
+<div style ="margin-left:10px;font-weight:normal" *ngIf="loading">Loading trade history...</div>
+<div style ="margin-left:10px;font-weight:normal" *ngIf="error">Error loading trade history. Please try again later.</div>
+
+<div *ngIf="!loading && !error">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort style="border: 10px solid lightgray; width: 100%;">
+
+        <!-- Trade ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell  style="color: darkblue;" *matHeaderCellDef> Trade ID </th>
+            <td mat-cell *matCellDef="let trade"> {{trade.id}} </td>
+        </ng-container>
+
+        <!-- Stock Symbol Column -->
+        <ng-container matColumnDef="stockTicker">
+            <th mat-header-cell  style="color: darkblue;" *matHeaderCellDef> Stock Symbol </th>
+            <td mat-cell *matCellDef="let trade"> {{trade.stockTicker}} </td>
+        </ng-container>
+
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="volume">
+            <th mat-header-cell  style="color: darkblue;" *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let trade"> {{trade.volume}} </td>
+        </ng-container>
+
+        <!-- Trade Type Column -->
+        <ng-container matColumnDef="buyOrSell">
+            <th mat-header-cell  style="color: darkblue;" *matHeaderCellDef> Trade Type </th>
+            <td mat-cell *matCellDef="let trade"> {{trade.buyOrSell}} </td>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+            <th mat-header-cell  style="color: darkblue;" *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let trade"> {{trade.price}} </td>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="tradeDate">
+            <th mat-header-cell style="color: darkblue;" *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let trade"> {{trade.tradeDate }} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="statusCode">
+            <th mat-header-cell  style="color: darkblue;" *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let trade"> {{ trade.statusCode === 0 ? 'Pending' : trade.statusCode === 1 ? 'Filled' : 'Completed' }}
+            </td>
+        </ng-container>
+
+        <tr mat-header-row   style="color: darkblue;" *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr mat-cell *matCellDef="let trade"> {{trade.id }}
+            <td>
+              <button mat-icon-button color="warn" (click)="deleteTrade(trade.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+    </table>
+  
+</div>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" showFirstLastButtons></mat-paginator>
